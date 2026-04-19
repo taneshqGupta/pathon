@@ -5,7 +5,7 @@
   let mainCanvas;
   /** @type {CanvasRenderingContext2D} */
   let mainCtx;
-  
+
   /** @type {HTMLCanvasElement} */
   let fovCanvas;
   /** @type {CanvasRenderingContext2D} */
@@ -18,24 +18,9 @@
 
   let isConnected = false;
   let latestState = null;
-  
+
   let agentAngle = 0;
   let agentPrevPos = { x: null, y: null };
-
-  let obstacleDensity = 15;
-  let velocityMultiplier = 1.0;
-
-  function updateParams() {
-    if (ws && isConnected) {
-      ws.send(
-        JSON.stringify({
-          command: "update_params",
-          obstacle_density: obstacleDensity,
-          velocity_multiplier: velocityMultiplier,
-        }),
-      );
-    }
-  }
 
   onMount(() => {
     connectWebSocket();
@@ -144,7 +129,7 @@
           CELL_SIZE * 4, // Making radius CELL_SIZE * 4
           "#f38ba8", // Red color for boulders
           Date.now() / 150 + obs.Boulder.x, // Offset mouth animation
-          bdAngle
+          bdAngle,
         );
       } else if (obs.Snake) {
         mainCtx.fillStyle = "#cba6f7";
@@ -194,7 +179,10 @@
       mainCtx.stroke();
     });
 
-    if (agentPrevPos.x !== null && (agentPrevPos.x !== ax || agentPrevPos.y !== ay)) {
+    if (
+      agentPrevPos.x !== null &&
+      (agentPrevPos.x !== ax || agentPrevPos.y !== ay)
+    ) {
       const dx = ax - agentPrevPos.x;
       const dy = ay - agentPrevPos.y;
       agentAngle = Math.atan2(dy, dx);
@@ -210,22 +198,30 @@
       CELL_SIZE * 4, // Making radius CELL_SIZE * 4
       "#89dceb", // Blue agent
       0, // Fixed timeOffset base
-      agentAngle // Agent direction
+      agentAngle, // Agent direction
     );
-    
+
     // Draw Game Over Screen over canvas
     if (state.game_state === "GameOver") {
       mainCtx.fillStyle = "rgba(0, 0, 0, 0.7)";
       mainCtx.fillRect(0, 0, mainCanvas.width, mainCanvas.height);
-      
+
       mainCtx.fillStyle = "#f38ba8"; // Red
       mainCtx.font = "80px 'VT323', monospace";
       mainCtx.textAlign = "center";
-      mainCtx.fillText("GAME OVER", mainCanvas.width / 2, mainCanvas.height / 2 - 20);
-      
+      mainCtx.fillText(
+        "GAME OVER",
+        mainCanvas.width / 2,
+        mainCanvas.height / 2 - 20,
+      );
+
       mainCtx.fillStyle = "#a6e3a1"; // Green
       mainCtx.font = "30px 'VT323', monospace";
-      mainCtx.fillText("Navigation Terminated.", mainCanvas.width / 2, mainCanvas.height / 2 + 30);
+      mainCtx.fillText(
+        "Navigation Terminated.",
+        mainCanvas.width / 2,
+        mainCanvas.height / 2 + 30,
+      );
       mainCtx.textAlign = "left"; // Reset
     }
   }
@@ -234,9 +230,9 @@
 
   function handleCanvasClick(e) {
     if (!latestState || latestState.game_state !== "Setup") return;
-    
+
     const rect = mainCanvas.getBoundingClientRect();
-    
+
     // Correctly scale mouse coordinates ignoring black bars from object-fit: contain
     const canvasRatio = mainCanvas.width / mainCanvas.height;
     const rectRatio = rect.width / rect.height;
@@ -265,62 +261,77 @@
 
     const px = (clickX / drawWidth) * mainCanvas.width;
     const py = (clickY / drawHeight) * mainCanvas.height;
-    
+
     const cx = Math.floor(px / CELL_SIZE);
     const cy = Math.floor(py / CELL_SIZE);
-    
+
     // If we've already selected an entity, second click drops it
     if (selectedEntity) {
-        if (ws && isConnected) {
-            if (selectedEntity.type === "agent") {
-                ws.send(JSON.stringify({ command: "move_agent", x: cx, y: cy }));
-            } else if (selectedEntity.type === "goal") {
-                ws.send(JSON.stringify({ command: "move_goal", x: cx, y: cy }));
-            } else if (selectedEntity.type === "obstacle") {
-                ws.send(JSON.stringify({ command: "move_obstacle", id: selectedEntity.id, x: cx, y: cy }));
-            }
+      if (ws && isConnected) {
+        if (selectedEntity.type === "agent") {
+          ws.send(JSON.stringify({ command: "move_agent", x: cx, y: cy }));
+        } else if (selectedEntity.type === "goal") {
+          ws.send(JSON.stringify({ command: "move_goal", x: cx, y: cy }));
+        } else if (selectedEntity.type === "obstacle") {
+          ws.send(
+            JSON.stringify({
+              command: "move_obstacle",
+              id: selectedEntity.id,
+              x: cx,
+              y: cy,
+            }),
+          );
         }
-        selectedEntity = null; // Unselect after moving
-        return;
+      }
+      selectedEntity = null; // Unselect after moving
+      return;
     }
-    
+
     // Helper to check pixel distance
     const checkHit = (gridX, gridY, radiusPx) => {
-        const targetPx = gridX * CELL_SIZE + CELL_SIZE / 2;
-        const targetPy = gridY * CELL_SIZE + CELL_SIZE / 2;
-        return Math.hypot(px - targetPx, py - targetPy) <= radiusPx;
+      const targetPx = gridX * CELL_SIZE + CELL_SIZE / 2;
+      const targetPy = gridY * CELL_SIZE + CELL_SIZE / 2;
+      return Math.hypot(px - targetPx, py - targetPy) <= radiusPx;
     };
-    
+
     const HIT_RADIUS = Math.max(CELL_SIZE * 6, 24); // Solid 24-pixel minimum radius
 
     // Otherwise, try to select an entity
-    if (checkHit(latestState.agent_pos[0], latestState.agent_pos[1], HIT_RADIUS)) {
+    if (
+      checkHit(latestState.agent_pos[0], latestState.agent_pos[1], HIT_RADIUS)
+    ) {
       selectedEntity = { label: "Agent", type: "agent" };
       return;
     }
-    
+
     // Goal text box is a bit wider, so give it a larger radius
-    if (checkHit(latestState.goal_pos[0], latestState.goal_pos[1], HIT_RADIUS * 1.5)) {
-        selectedEntity = { label: "Goal", type: "goal" };
-        return;
+    if (
+      checkHit(
+        latestState.goal_pos[0],
+        latestState.goal_pos[1],
+        HIT_RADIUS * 1.5,
+      )
+    ) {
+      selectedEntity = { label: "Goal", type: "goal" };
+      return;
     }
 
     for (let i = 0; i < latestState.obstacles.length; i++) {
-        let obs = latestState.obstacles[i];
-        if (obs.Boulder) {
-             const bx = obs.Boulder.x + obs.Boulder.width / 2;
-             const by = obs.Boulder.y + obs.Boulder.height / 2;
-             if (checkHit(bx, by, HIT_RADIUS)) {
-                 selectedEntity = { label: "Boulder", type: "obstacle", id: i };
-                 return;
-             }
-        } else if (obs.Snake && obs.Snake.body.length > 0) {
-             const head = obs.Snake.body[0];
-             if (checkHit(head[0], head[1], HIT_RADIUS)) {
-                 selectedEntity = { label: "Snake", type: "obstacle", id: i };
-                 return;
-             }
+      let obs = latestState.obstacles[i];
+      if (obs.Boulder) {
+        const bx = obs.Boulder.x + obs.Boulder.width / 2;
+        const by = obs.Boulder.y + obs.Boulder.height / 2;
+        if (checkHit(bx, by, HIT_RADIUS)) {
+          selectedEntity = { label: "Boulder", type: "obstacle", id: i };
+          return;
         }
+      } else if (obs.Snake && obs.Snake.body.length > 0) {
+        const head = obs.Snake.body[0];
+        if (checkHit(head[0], head[1], HIT_RADIUS)) {
+          selectedEntity = { label: "Snake", type: "obstacle", id: i };
+          return;
+        }
+      }
     }
   }
 
@@ -368,7 +379,12 @@
   <div class="header">
     <div style="display: flex; align-items: center; gap: 15px;">
       <h1>Hack 60: Autonomous Navigation Engine</h1>
-      <a href="/replay.html" class="nav-link" style="color: #89b4fa; text-decoration: none; font-weight: bold;">View Replays</a>
+      <a
+        href="/replay.html"
+        class="nav-link"
+        style="color: #89b4fa; text-decoration: none; font-weight: bold;"
+        >View Replays</a
+      >
     </div>
     <span class="status {isConnected ? 'online' : 'offline'}">
       {isConnected ? "Backend Connected (30Hz)" : "Reconnecting..."}
@@ -378,15 +394,21 @@
   <div class="dashboard">
     <div class="global-view" style="position: relative;">
       <h2>Global Simulation</h2>
-      
+
       {#if latestState && latestState.game_state === "Setup"}
         <div class="setup-overlay">
           <h3>Map Setup Editor</h3>
           <p style="color: #f38ba8; font-weight: bold;">
-             {selectedEntity ? `Moving ${selectedEntity.label}... Click anywhere to place.` : "Click an Agent, Goal, or Obstacle to move it."}
+            {selectedEntity
+              ? `Moving ${selectedEntity.label}... Click anywhere to place.`
+              : "Click an Agent, Goal, or Obstacle to move it."}
           </p>
           {#if selectedEntity}
-             <button class="action-btn" style="background-color: #f38ba8; margin-bottom: 10px;" on:click={() => selectedEntity = null}>Cancel Move</button>
+            <button
+              class="action-btn"
+              style="background-color: #f38ba8; margin-bottom: 10px;"
+              on:click={() => (selectedEntity = null)}>Cancel Move</button
+            >
           {/if}
           <button class="action-btn start-btn" on:click={triggerStart}>
             START SEARCH
@@ -396,16 +418,18 @@
 
       {#if latestState && latestState.game_state === "GameOver"}
         <div class="gameover-overlay">
-           <button class="action-btn" on:click={triggerReset}>
-             Return to Setup
-           </button>
+          <button class="action-btn" on:click={triggerReset}>
+            Return to Setup
+          </button>
         </div>
       {/if}
 
-      <canvas 
-          bind:this={mainCanvas} 
-          on:click={handleCanvasClick}
-          style={latestState && latestState.game_state === "Setup" ? "cursor: " + (selectedEntity ? "crosshair" : "pointer") : ""}
+      <canvas
+        bind:this={mainCanvas}
+        on:click={handleCanvasClick}
+        style={latestState && latestState.game_state === "Setup"
+          ? "cursor: " + (selectedEntity ? "crosshair" : "pointer")
+          : ""}
       ></canvas>
     </div>
 
@@ -470,56 +494,41 @@
         {/if}
       </div>
 
+      <!-- Metrics Panel -->
+      <div class="metrics">
+        <h3>Metrics:</h3>
+        {#if latestState}
+          <p>Wins: {latestState.goal_reach_count}</p>
+          <p>Collisions: {latestState.collision_count}</p>
+          <p>Inference: {latestState.replanning_speed_ms.toFixed(2)} ms</p>
+          <p>Obstacles: {latestState.obstacles.length} (density: 5)</p>
+          <p>
+            Free Cells: {latestState.static_grid.filter((c) => c === 0).length}
+          </p>
+          <p>
+            Navigable %: {(
+              (latestState.static_grid.filter((c) => c === 0).length /
+                (latestState.width * latestState.height)) *
+              100
+            ).toFixed(1)}%
+          </p>
+        {:else}
+          <p>Waiting...</p>
+        {/if}
+      </div>
+
       <div class="controls">
         <h2>Simulation Controls</h2>
         <button
           class="action-btn"
           on:click={triggerReset}
-          disabled={!isConnected || (latestState && latestState.game_state !== "Setup")}
+          disabled={!isConnected ||
+            (latestState && latestState.game_state !== "Setup")}
         >
           Generate New Domain Layout
         </button>
       </div>
     </div>
-  </div>
-
-  <!-- Metrics Panel -->
-  <div class="metrics">
-    <h3>Metrics:</h3>
-    {#if latestState}
-      <p>Wins: {latestState.goal_reach_count}</p>
-      <p>Collisions: {latestState.collision_count}</p>
-      <p>Speed: {latestState.replanning_speed_ms.toFixed(2)} ms</p>
-    {:else}
-      <p>Waiting...</p>
-    {/if}
-  </div>
-
-  <!-- Parameter Controls -->
-  <div class="param-controls">
-    <label
-      >Density:
-      <input
-        type="range"
-        min="0"
-        max="40"
-        bind:value={obstacleDensity}
-        on:change={updateParams}
-      />
-      ({latestState?.obstacle_density ?? 15})
-    </label>
-    <label
-      >Vel:
-      <input
-        type="range"
-        min="0.5"
-        max="3.0"
-        step="0.1"
-        bind:value={velocityMultiplier}
-        on:change={updateParams}
-      />
-      ({latestState?.velocity_multiplier ?? 1.0}x)
-    </label>
   </div>
 </main>
 
@@ -541,15 +550,14 @@
     align-items: center;
   }
   .container {
-    padding: 10px;
-    width: 100%;
-    max-width: 100vw;
-    max-height: 100vh;
+    padding: 15px;
+    width: 100vw;
+    height: 100vh;
+    max-width: calc(100vh * 16 / 9);
+    max-height: calc(100vw * 9 / 16);
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    aspect-ratio: 16/9;
   }
   .header {
     display: flex;
@@ -558,6 +566,7 @@
     border-bottom: 1px solid #313244;
     padding-bottom: 5px;
     margin-bottom: 10px;
+    flex-shrink: 0;
   }
   .header h1 {
     margin: 0;
@@ -583,28 +592,60 @@
     min-height: 0;
   }
   .global-view {
-    flex: 1 1 auto;
+    flex: 1;
     display: flex;
     flex-direction: column;
-    height: 100%;
     min-width: 0;
+    min-height: 0;
   }
-  .global-view canvas,
-  .fov-view canvas {
+  .global-view h2 {
+    flex-shrink: 0;
+  }
+  .global-view canvas {
+    flex: 1;
     border: 2px solid #313244;
     border-radius: 8px;
     background-color: #1e1e2e;
+    width: 100%;
+    height: 100%;
     max-height: 100%;
-    max-width: 100%;
     object-fit: contain;
+    min-height: 0;
+  }
+  .fov-view {
+    background-color: #1e1e2e;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #313244;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+  .fov-view h2 {
+    margin-bottom: 0;
+    align-self: flex-start;
+  }
+  .fov-view canvas {
+    border: 2px solid #313244;
+    border-radius: 8px;
+    background-color: #11111b;
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+  .fov-view p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #bac2de;
   }
   .side-panel {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    flex: 0 0 320px;
-    max-height: 100%;
-    overflow-y: hidden;
+    flex: 0 0 300px;
+    min-height: 0;
   }
   .controls {
     background-color: #1e1e2e;
@@ -614,28 +655,34 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
+    flex-shrink: 0;
   }
-  .metrics,
-  .param-controls {
-    display: flex;
-    justify-content: space-around;
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px 10px;
     background-color: #1e1e2e;
     padding: 10px;
     border-radius: 8px;
     border: 1px solid #313244;
-    margin-top: 10px;
+    flex-shrink: 0;
   }
   .metrics h3 {
-    margin: 0;
+    grid-column: span 2;
+    margin: 0 0 5px 0;
     color: #a6e3a1;
+    font-size: 1.1rem;
   }
   .metrics p,
   .param-controls label {
     margin: 0;
-    font-size: 1.1rem;
+    font-size: 1rem;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .stats-box {
     font-size: 1rem;
