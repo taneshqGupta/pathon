@@ -1,0 +1,121 @@
+### Architecture & Implementation Specification: Hack 60 - PS 6
+Question:
+6. Autonomous Obstacle Avoidance & Path Planning (1/2)
+Objective
+• Enable a soft bot to
+autonomously navigate from
+a start point to a goal.
+• Detect and avoid static and
+moving obstacles in the
+environment.
+• Plan safe and efficient paths
+in cluttered scenarios.
+• Adapt navigation behavior in
+response to dynamic
+changes.
+• Demonstrate reliable
+autonomous movement in a
+simulated environment.
+Dataset
+• Custom-generated simulation
+environments or publicly
+available maps. Suggested
+sources: Gazebo worlds library
+(https://app.gazebosim.org/fue
+l/worlds)
+• Teams may also create their
+own obstacle course.
+Environment
+• Suggested: ROS2 + Gazebo +
+Turtlebot3*
+• Webote
+(https://cyberbotics.com/)
+• PyBullet
+(https://pybullet.org/wordpr
+ess/)
+• Structured grid-based
+environments are also
+acceptable.
+*Note: Ros Installation- https://docs.ros.org/en/rolling/index.html, Gazebo Installation -https://gazebosim.org/docs
+TurtleBot3 installation- https://emanual.robotis.com/docs/en/platform/turtlebot3/quick-start/
+21
+6. Autonomous Obstacle Avoidance & Path Planning (2/2)
+Requirement
+• Implement a path planning
+algorithm (A*, RRT, Dijkstra,
+or learned)
+• Detect static and dynamic
+obstacles in real time
+• Re-plan path upon detecting
+unexpected obstacles
+• Reach the goal with
+minimum collisions
+Evaluation Criteria
+• Goal Reach Rate
+• Collision Count
+• Path Optimality
+• Re-planning Speed
+• Demo Quality
+Final Output
+• A live simulation showing the
+AI agent navigating from
+point A to point B while
+avoiding obstacles in real
+time.
+• Bonus: Implementation of a
+Reinforcement Learning–
+based navigation policy for
+adaptive and learned path
+planning
+
+[cite_start]This document serves as the master blueprint for the Autonomous Obstacle Avoidance & Path Planning system[cite: 1]. [cite_start]It outlines the Global-Local Hybrid architecture, detailing the established high-performance simulation foundation and the required steps to achieve a fully autonomous Reinforcement Learning (RL) navigation policy[cite: 1].
+
+---
+
+### Execution Status: Accomplished vs. Remaining
+
+**Accomplished Tasks (The Rust/Svelte Foundation):**
+* **Dataset & Environment:** A high-speed headless Rust tick-server was built. Domain Randomization generating mazes and rooms natively fulfills the "Dataset" goal.
+* **Path Planning & Sensors:** The global Dijkstra (Flow Field) perfectly recalculates downhill trajectories. Local 15x15 FOV grid and 8-ray LiDAR extraction are strictly implemented for the "Detect... in real time" requirement.
+* **Live Simulation:** An `axum` WebSocket streams JSON directly to a lightweight Svelte grid visualization without DOM overhead.
+* **FFI & Reward Engineering:** The PyO3 bridge is complete (exposing `reset_env` and `step_action`). The step-penalties ($0.01 time, 0.1 prox) and terminal bounds (+100/-50) correctly calculate inside Rust natively, ensuring blisteringly fast Step logic.
+
+---
+
+### The Strict Next Steps (Pending Implementation)
+
+**Step 1: The Python Training Wrapper (`train.py`)** [ACCOMPLISHED]
+* **Context:** The wrapper wraps the Rust backend.
+* **Status:** Created `PathonGymEnv` class wrapping the Rust `pathon_env` module. Mapped the continuous/discrete spaces and reset/step loops. Fixed Python's main block initialization.
+
+**Step 2: Remote GPU Training & Export (Bonus Requirement)** [REMAINING - PREPARED]
+* **Context:** The environment is fully optimized to run headless in Python without WebSockets dragging the speed down.
+* **Action:**
+  1. On the SSH instance, compile the Rust backend for Python using `maturin develop --release`.
+  2. Implement/Refine Stable-Baselines3 `PPO` and execute `.learn()`.
+  3. Wait for training to finish and export `model.onnx` back to local.
+
+**Step 3: Integrating the Brain (ONNX via Rust Engine)** [PARTIALLY ACCOMPLISHED]
+* **Context:** The fallback/initialization logic `init_model` is updated in `main.rs` to not crash without the file.
+* **Action:**
+  1. Download the trained `model.onnx` into `backend/`.
+  2. In `env.rs:tick()`, complete the data conversion `ort::Value` from `Arrays` reflecting the 4-frame stack history logic exactly, and use `.extract_tensor` for `chosen_action`.
+
+**Step 4: Demo Quality Metrics Dashboard (Svelte Frontend)** [ACCOMPLISHED]
+* **Context:** Demo dashboard needs live parameters mapping and visual consistency.
+* **Status:** Implemented two-way sync for settings. Added `"update_params"` parser in `main.rs` to dynamically control parameters. The Svelte dashboard now perfectly limits elements to a strict 16:9 non-scrolling layout. "Bombs" were purged entirely. Agents and Boulders have been transformed into fully animating (yapping) Pacmans. Real-time 8-ray LiDAR readings are displayed beautifully without overflowing the sidebar. Buttons use consistent pixel fonts.
+
+### The Remaining Next Steps
+
+**Step 5: The Python Training Wrapper (`train.py`)** [DONE]
+* **Status:** Created wrapper wrapping the Rust backend natively over PyO3 correctly handling `FrameStack` encapsulation.
+
+**Step 6: Remote GPU Training & Export** [NEXT UP]
+* **Context:** Generate intelligent weights using the optimized headless environment.
+* **Action:** Secure an SSH instance, pull repo, compile (`maturin develop --release`), run Stable-Baselines3 `PPO` inside `train.py`. Train the bot, ensuring it maximizes rewards avoiding the new pacmans while moving toward the goal.
+* **Goal:** Export the `model.onnx` final policy to local.
+
+**Step 7: Integrate final ONNX into Rust Core** [PENDING]
+* **Action:** Update `env.rs:tick()` `session.run()` to input frame vectors realistically into `ort::Value` and decode the argmax to `chosen_action`. Let the model automatically drive via the 30Hz tick instead of overriding.
+
+---
