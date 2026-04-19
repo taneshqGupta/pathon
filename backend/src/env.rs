@@ -183,7 +183,7 @@ impl GridEnv {
             self.obstacles.pop();
         }
 
-        self.fov = self.get_local_fov(25);
+        self.fov = self.get_local_fov(15);
         self.lidar = self.get_lidar_readings();
 
         let (gx, gy) = self.get_flow_gradient(self.agent_pos.0, self.agent_pos.1);
@@ -202,7 +202,7 @@ impl GridEnv {
 
     pub fn reset_env(&mut self) -> (Vec<u8>, Vec<f32>, (f32, f32)) {
         self.reset_with_random_layout();
-        self.fov = self.get_local_fov(25);
+        self.fov = self.get_local_fov(15);
         self.lidar = self.get_lidar_readings();
 
         self.fov_history.clear();
@@ -359,7 +359,7 @@ impl GridEnv {
             }
         }
 
-        let is_maze = rng.gen::<f32>() < 0.5;
+        let is_maze = false;
 
         if !is_maze {
             // Big large logical walls
@@ -379,7 +379,6 @@ impl GridEnv {
                 }
             }
         } else {
-            // Standardized Maze Generation: Rooms with guaranteed multiple paths
             let cell_size = 20;
             let cols = w / cell_size;
             let rows = h / cell_size;
@@ -389,7 +388,6 @@ impl GridEnv {
                     let px = cx * cell_size;
                     let py = cy * cell_size;
 
-                    // Corner pillars
                     for dy in 0..4 {
                         for dx in 0..4 {
                             if px + dx < w - 4 && py + dy < h - 4 {
@@ -398,11 +396,10 @@ impl GridEnv {
                         }
                     }
 
-                    // Horizontal walls (leaving a gap in the middle)
                     if rng.gen::<f32>() < 0.45 {
                         if px + 4 < w - 4 && py < h - 4 {
                             let gap_start = rng.gen_range(4..=(cell_size - 8));
-                            let gap_end = gap_start + 6; // Create a wide gap
+                            let gap_end = gap_start + 6; 
 
                             for dx in 4..cell_size {
                                 if dx >= gap_start && dx <= gap_end {
@@ -417,11 +414,10 @@ impl GridEnv {
                         }
                     }
 
-                    // Vertical walls (leaving a gap in the middle)
                     if rng.gen::<f32>() < 0.45 {
                         if px < w - 4 && py + 4 < h - 4 {
                             let gap_start = rng.gen_range(4..=(cell_size - 8));
-                            let gap_end = gap_start + 6; // Create a wide gap
+                            let gap_end = gap_start + 6;
 
                             for dy in 4..cell_size {
                                 if dy >= gap_start && dy <= gap_end {
@@ -753,7 +749,7 @@ impl GridEnv {
     pub fn move_agent(&mut self, x: i32, y: i32) {
         if x >= 0 && x < self.width && y >= 0 && y < self.height {
             self.agent_pos = (x, y);
-            self.fov = self.get_local_fov(25);
+            self.fov = self.get_local_fov(15);
             self.lidar = self.get_lidar_readings();
         }
     }
@@ -783,7 +779,7 @@ impl GridEnv {
                     *y = target_y;
                 }
             }
-            self.fov = self.get_local_fov(25);
+            self.fov = self.get_local_fov(15);
             self.lidar = self.get_lidar_readings();
         }
     }

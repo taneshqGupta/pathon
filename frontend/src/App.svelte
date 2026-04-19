@@ -13,8 +13,8 @@
   let ws;
 
   const CELL_SIZE = 4;
-  const FOV_CELL_SIZE = 7;
-  const FOV_SIZE = 25;
+  const FOV_CELL_SIZE = 15;
+  const FOV_SIZE = 15;
 
   let isConnected = false;
   let latestState = null;

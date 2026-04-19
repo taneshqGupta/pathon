@@ -12,8 +12,8 @@
   let fovCtx;
 
   const CELL_SIZE = 4;
-  const FOV_CELL_SIZE = 7;
-  const FOV_SIZE = 25;
+  const FOV_CELL_SIZE = 15;
+  const FOV_SIZE = 15;
 
   let frames = [];
   let currentFrameIndex = 0;
@@ -28,36 +28,12 @@
   let isFetchingChunk = false;
 
   const availableReplays = [
-    "replay_step_50000.json",
-    "replay_step_100000.json",
-    "replay_step_150000.json",
-    "replay_step_200000.json",
     "replay_step_250000.json",
-    "replay_step_300000.json",
     "replay_step_350000.json",
-    "replay_step_400020.json",
-    "replay_step_900000.json",
-    "replay_step_700020.json",
     "replay_step_850020.json",
     "replay_step_800010.json",
-    "replay_step_750000.json",
-    "replay_step_950010.json",
-    "replay_step_1300020.json",
     "replay_step_1250010.json",
-    "replay_step_1200000.json",
-    "replay_step_1500000.json",
-    "replay_step_1550010.json",
-    "replay_step_1600020.json",
-    "replay_step_1650000.json",
-    "replay_step_1700010.json",
-    "replay_step_1750020.json",
-    "replay_step_1800000.json",
-    "replay_step_1850010.json",
-    "replay_step_1900020.json",
     "replay_step_1950000.json",
-    "replay_step_1400010.json",
-    
-
   ];
 
   $: localIndex = currentFrameIndex - currentChunkStart;
@@ -68,6 +44,37 @@
 
   onMount(() => {
     loadReplay();
+    window['loadReplayFile'] = async (name) => {
+      selectedReplay = name;
+      await loadReplay();
+    };
+    window['startRecording'] = async (fps = 30) => {
+      return new Promise((resolve) => {
+        const stream = mainCanvas.captureStream(fps);
+        const mediaRecorder = new MediaRecorder(stream, { mimeType: "video/webm" });
+        const chunks = [];
+        mediaRecorder.ondataavailable = (e) => chunks.push(e.data);
+        mediaRecorder.onstop = () => {
+          const blob = new Blob(chunks, { type: "video/webm" });
+          const reader = new FileReader();
+          reader.onload = () => {
+            window['_recordedVideoBase64'] = reader.result;
+            resolve();
+          };
+          reader.readAsDataURL(blob);
+        };
+        mediaRecorder.start(100);
+        isPlaying = true; // force restart
+        currentFrameIndex = 0;
+        startPlayback();
+        const check = setInterval(() => {
+          if (!isPlaying) {
+            clearInterval(check);
+            mediaRecorder.stop();
+          }
+        }, 100);
+      });
+    };
   });
 
   onDestroy(() => {
@@ -75,22 +82,23 @@
   });
 
   async function fetchChunk(start) {
+    if (frames.length > 0 && start >= 0 && start < frames.length) return; // Already loaded full file
     isFetchingChunk = true;
     try {
-      const res = await fetch(`http://localhost:8000/api/replay?file=${selectedReplay}&start=${start}&size=${CHUNK_SIZE}`);
+      const res = await fetch(`/replays/${selectedReplay}`);
       if (res.ok) {
         const data = await res.json();
-        frames = data.frames;
-        totalFrames = data.totalFrames;
-        currentChunkStart = start;
+        frames = data; // Array of states directly
+        totalFrames = frames.length;
+        currentChunkStart = 0;
         if (frames.length > 0) {
           renderCurrentFrame();
         }
       } else {
-        console.error("Failed to fetch chunk");
+        console.error("Failed to fetch replay", res.status);
       }
     } catch (e) {
-      console.error(e);
+      console.error("Error fetching replay:", e);
     } finally {
       isFetchingChunk = false;
     }
