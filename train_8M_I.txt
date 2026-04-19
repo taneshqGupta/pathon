@@ -1,0 +1,146 @@
+gan_env) teaching@dslab:~/pathon$ python train1.py 
+Training on device: CUDA with Shared CPU Memory & AMP
+Update: 1/130 | Steps: 61440 | SPS: 7938 | Ret: -15.15 | Len: 73.8 | Goal: 0.0% | v_loss: 10.1457 | approx_kl: 0.0094
+Update: 2/130 | Steps: 122880 | SPS: 8578 | Ret: -15.34 | Len: 134.2 | Goal: 0.0% | v_loss: 9.2619 | approx_kl: 0.0066
+Update: 3/130 | Steps: 184320 | SPS: 8916 | Ret: -17.52 | Len: 169.1 | Goal: 1.0% | v_loss: 10.5750 | approx_kl: 0.0112
+Update: 4/130 | Steps: 245760 | SPS: 9096 | Ret: -8.82 | Len: 168.7 | Goal: 1.0% | v_loss: 8.4282 | approx_kl: 0.0098
+Update: 5/130 | Steps: 307200 | SPS: 9243 | Ret: -12.12 | Len: 232.9 | Goal: 1.0% | v_loss: 8.6299 | approx_kl: 0.0119
+Update: 6/130 | Steps: 368640 | SPS: 9330 | Ret: -5.88 | Len: 264.6 | Goal: 1.0% | v_loss: 10.5388 | approx_kl: 0.0084
+Update: 7/130 | Steps: 430080 | SPS: 9401 | Ret: -11.47 | Len: 341.7 | Goal: 3.0% | v_loss: 9.0060 | approx_kl: 0.0069
+Update: 8/130 | Steps: 491520 | SPS: 9445 | Ret: -4.27 | Len: 246.6 | Goal: 1.0% | v_loss: 9.7010 | approx_kl: 0.0067
+Update: 9/130 | Steps: 552960 | SPS: 9508 | Ret: -8.67 | Len: 277.7 | Goal: 1.0% | v_loss: 7.7036 | approx_kl: 0.0061
+Update: 10/130 | Steps: 614400 | SPS: 9543 | Ret: -9.77 | Len: 235.9 | Goal: 0.0% | v_loss: 11.0002 | approx_kl: 0.0114
+Update: 11/130 | Steps: 675840 | SPS: 9570 | Ret: -7.15 | Len: 251.6 | Goal: 0.0% | v_loss: 8.5251 | approx_kl: 0.0088
+Update: 12/130 | Steps: 737280 | SPS: 9594 | Ret: -9.39 | Len: 282.3 | Goal: 0.0% | v_loss: 9.9335 | approx_kl: 0.0087
+Update: 13/130 | Steps: 798720 | SPS: 9622 | Ret: -7.15 | Len: 257.1 | Goal: 2.0% | v_loss: 6.3052 | approx_kl: 0.0089
+Update: 14/130 | Steps: 860160 | SPS: 9643 | Ret: -0.65 | Len: 218.5 | Goal: 3.0% | v_loss: 13.6722 | approx_kl: 0.0049
+Update: 15/130 | Steps: 921600 | SPS: 9641 | Ret: -17.81 | Len: 208.2 | Goal: 1.0% | v_loss: 11.1948 | approx_kl: 0.0091
+Update: 16/130 | Steps: 983040 | SPS: 9648 | Ret: -1.23 | Len: 304.5 | Goal: 2.0% | v_loss: 9.5960 | approx_kl: 0.0084
+Update: 17/130 | Steps: 1044480 | SPS: 9643 | Ret: -0.53 | Len: 163.2 | Goal: 2.0% | v_loss: 11.2139 | approx_kl: 0.0070
+Update: 18/130 | Steps: 1105920 | SPS: 9655 | Ret: -9.12 | Len: 243.3 | Goal: 1.0% | v_loss: 10.4253 | approx_kl: 0.0140
+Update: 19/130 | Steps: 1167360 | SPS: 9653 | Ret: -7.20 | Len: 204.2 | Goal: 3.0% | v_loss: 9.5102 | approx_kl: 0.0070
+Update: 20/130 | Steps: 1228800 | SPS: 9659 | Ret: -12.87 | Len: 216.3 | Goal: 1.0% | v_loss: 13.0026 | approx_kl: 0.0076
+Update: 21/130 | Steps: 1290240 | SPS: 9661 | Ret: -2.85 | Len: 191.8 | Goal: 2.0% | v_loss: 10.2661 | approx_kl: 0.0114
+Update: 22/130 | Steps: 1351680 | SPS: 9667 | Ret: -11.60 | Len: 246.4 | Goal: 2.0% | v_loss: 12.0699 | approx_kl: 0.0123
+Update: 23/130 | Steps: 1413120 | SPS: 9670 | Ret: -3.07 | Len: 189.0 | Goal: 4.0% | v_loss: 9.5419 | approx_kl: 0.0093
+Update: 24/130 | Steps: 1474560 | SPS: 9673 | Ret: -9.17 | Len: 198.6 | Goal: 2.0% | v_loss: 11.0904 | approx_kl: 0.0064
+Update: 25/130 | Steps: 1536000 | SPS: 9677 | Ret: -4.83 | Len: 279.9 | Goal: 3.0% | v_loss: 10.8149 | approx_kl: 0.0129
+Update: 26/130 | Steps: 1597440 | SPS: 9682 | Ret: 3.08 | Len: 246.1 | Goal: 7.0% | v_loss: 6.4286 | approx_kl: 0.0126
+Update: 27/130 | Steps: 1658880 | SPS: 9685 | Ret: -2.69 | Len: 262.1 | Goal: 3.0% | v_loss: 8.9397 | approx_kl: 0.0061
+Update: 28/130 | Steps: 1720320 | SPS: 9683 | Ret: -6.60 | Len: 268.1 | Goal: 5.0% | v_loss: 11.5951 | approx_kl: 0.0071
+Update: 29/130 | Steps: 1781760 | SPS: 9683 | Ret: 3.99 | Len: 185.4 | Goal: 3.0% | v_loss: 8.6364 | approx_kl: 0.0084
+Update: 30/130 | Steps: 1843200 | SPS: 9685 | Ret: -7.96 | Len: 210.2 | Goal: 7.0% | v_loss: 14.8902 | approx_kl: 0.0050
+Update: 31/130 | Steps: 1904640 | SPS: 9687 | Ret: 6.10 | Len: 222.0 | Goal: 1.0% | v_loss: 10.1084 | approx_kl: 0.0059
+Update: 32/130 | Steps: 1966080 | SPS: 9682 | Ret: 5.84 | Len: 187.3 | Goal: 6.0% | v_loss: 10.1514 | approx_kl: 0.0056
+
+[Callback] Recording evaluation episode at step 2000010...
+[Callback] Replay saved: ./replays/replay_step_2000010.json (5 frames)
+
+Update: 33/130 | Steps: 2027520 | SPS: 9673 | Ret: 9.92 | Len: 218.7 | Goal: 5.0% | v_loss: 10.3338 | approx_kl: 0.0061
+Update: 34/130 | Steps: 2088960 | SPS: 9675 | Ret: -10.19 | Len: 174.8 | Goal: 7.0% | v_loss: 13.5075 | approx_kl: 0.0056
+Update: 35/130 | Steps: 2150400 | SPS: 9680 | Ret: 7.15 | Len: 180.2 | Goal: 3.0% | v_loss: 10.5345 | approx_kl: 0.0057
+Update: 36/130 | Steps: 2211840 | SPS: 9682 | Ret: 20.79 | Len: 256.8 | Goal: 13.0% | v_loss: 7.6191 | approx_kl: 0.0032
+Update: 37/130 | Steps: 2273280 | SPS: 9682 | Ret: 0.62 | Len: 238.8 | Goal: 7.0% | v_loss: 11.6337 | approx_kl: 0.0073
+Update: 38/130 | Steps: 2334720 | SPS: 9685 | Ret: 6.73 | Len: 151.8 | Goal: 11.0% | v_loss: 9.5186 | approx_kl: 0.0085
+Update: 39/130 | Steps: 2396160 | SPS: 9685 | Ret: 16.04 | Len: 171.8 | Goal: 5.0% | v_loss: 9.3170 | approx_kl: 0.0084
+Update: 40/130 | Steps: 2457600 | SPS: 9686 | Ret: 9.53 | Len: 171.2 | Goal: 8.0% | v_loss: 13.1365 | approx_kl: 0.0071
+Update: 41/130 | Steps: 2519040 | SPS: 9685 | Ret: 9.29 | Len: 140.8 | Goal: 10.0% | v_loss: 12.8656 | approx_kl: 0.0059
+Update: 42/130 | Steps: 2580480 | SPS: 9688 | Ret: 21.22 | Len: 205.7 | Goal: 13.0% | v_loss: 11.5195 | approx_kl: 0.0083
+Update: 43/130 | Steps: 2641920 | SPS: 9685 | Ret: 5.82 | Len: 200.4 | Goal: 7.0% | v_loss: 13.9166 | approx_kl: 0.0087
+Update: 44/130 | Steps: 2703360 | SPS: 9683 | Ret: 7.90 | Len: 198.4 | Goal: 8.0% | v_loss: 13.4323 | approx_kl: 0.0103
+Update: 45/130 | Steps: 2764800 | SPS: 9686 | Ret: 13.25 | Len: 242.8 | Goal: 14.0% | v_loss: 11.4647 | approx_kl: 0.0089
+Update: 46/130 | Steps: 2826240 | SPS: 9684 | Ret: 20.63 | Len: 167.3 | Goal: 13.0% | v_loss: 13.6708 | approx_kl: 0.0056
+Update: 47/130 | Steps: 2887680 | SPS: 9682 | Ret: 12.36 | Len: 160.5 | Goal: 13.0% | v_loss: 14.7975 | approx_kl: 0.0083
+Update: 48/130 | Steps: 2949120 | SPS: 9680 | Ret: 22.62 | Len: 173.1 | Goal: 11.0% | v_loss: 11.3233 | approx_kl: 0.0049
+Update: 49/130 | Steps: 3010560 | SPS: 9684 | Ret: 16.93 | Len: 174.6 | Goal: 14.0% | v_loss: 9.9579 | approx_kl: 0.0077
+Update: 50/130 | Steps: 3072000 | SPS: 9681 | Ret: 13.97 | Len: 162.4 | Goal: 9.0% | v_loss: 11.4434 | approx_kl: 0.0044
+Update: 51/130 | Steps: 3133440 | SPS: 9679 | Ret: 20.78 | Len: 170.7 | Goal: 7.0% | v_loss: 11.6768 | approx_kl: 0.0056
+Update: 52/130 | Steps: 3194880 | SPS: 9677 | Ret: 22.71 | Len: 183.3 | Goal: 8.0% | v_loss: 10.8756 | approx_kl: 0.0105
+Update: 53/130 | Steps: 3256320 | SPS: 9675 | Ret: 16.70 | Len: 122.5 | Goal: 14.0% | v_loss: 12.8093 | approx_kl: 0.0049
+Update: 54/130 | Steps: 3317760 | SPS: 9669 | Ret: 20.99 | Len: 196.9 | Goal: 12.0% | v_loss: 14.1965 | approx_kl: 0.0104
+Update: 55/130 | Steps: 3379200 | SPS: 9667 | Ret: 19.51 | Len: 155.1 | Goal: 10.0% | v_loss: 10.3529 | approx_kl: 0.0063
+Update: 56/130 | Steps: 3440640 | SPS: 9667 | Ret: 15.75 | Len: 141.4 | Goal: 11.0% | v_loss: 13.3262 | approx_kl: 0.0061
+Update: 57/130 | Steps: 3502080 | SPS: 9665 | Ret: 15.74 | Len: 123.5 | Goal: 13.0% | v_loss: 12.8926 | approx_kl: 0.0066
+Update: 58/130 | Steps: 3563520 | SPS: 9660 | Ret: 18.07 | Len: 111.5 | Goal: 15.0% | v_loss: 11.0159 | approx_kl: 0.0072
+Update: 59/130 | Steps: 3624960 | SPS: 9657 | Ret: 28.48 | Len: 163.9 | Goal: 15.0% | v_loss: 14.4371 | approx_kl: 0.0069
+Update: 60/130 | Steps: 3686400 | SPS: 9654 | Ret: 24.56 | Len: 200.1 | Goal: 18.0% | v_loss: 17.3916 | approx_kl: 0.0085
+Update: 61/130 | Steps: 3747840 | SPS: 9650 | Ret: 8.40 | Len: 97.9 | Goal: 7.0% | v_loss: 18.6334 | approx_kl: 0.0083
+Update: 62/130 | Steps: 3809280 | SPS: 9648 | Ret: 31.34 | Len: 132.5 | Goal: 18.0% | v_loss: 15.6929 | approx_kl: 0.0085
+Update: 63/130 | Steps: 3870720 | SPS: 9644 | Ret: 29.94 | Len: 152.5 | Goal: 22.0% | v_loss: 15.2143 | approx_kl: 0.0075
+Update: 64/130 | Steps: 3932160 | SPS: 9643 | Ret: 28.30 | Len: 171.2 | Goal: 17.0% | v_loss: 12.2454 | approx_kl: 0.0103
+Update: 65/130 | Steps: 3993600 | SPS: 9638 | Ret: 21.34 | Len: 102.8 | Goal: 14.0% | v_loss: 17.4058 | approx_kl: 0.0049
+
+[Callback] Recording evaluation episode at step 4000020...
+[Callback] Replay saved: ./replays/replay_step_4000020.json (1000 frames)
+
+Update: 66/130 | Steps: 4055040 | SPS: 8733 | Ret: 18.10 | Len: 113.2 | Goal: 16.0% | v_loss: 18.1084 | approx_kl: 0.0034
+Update: 67/130 | Steps: 4116480 | SPS: 8742 | Ret: 21.75 | Len: 114.0 | Goal: 11.0% | v_loss: 18.2846 | approx_kl: 0.0092
+Update: 68/130 | Steps: 4177920 | SPS: 8753 | Ret: 10.25 | Len: 124.8 | Goal: 13.0% | v_loss: 17.0289 | approx_kl: 0.0104
+Update: 69/130 | Steps: 4239360 | SPS: 8763 | Ret: 11.32 | Len: 80.9 | Goal: 14.0% | v_loss: 15.4691 | approx_kl: 0.0058
+Update: 70/130 | Steps: 4300800 | SPS: 8770 | Ret: 21.40 | Len: 111.8 | Goal: 14.0% | v_loss: 19.7180 | approx_kl: 0.0062
+Update: 71/130 | Steps: 4362240 | SPS: 8776 | Ret: 20.88 | Len: 135.2 | Goal: 18.0% | v_loss: 15.6674 | approx_kl: 0.0083
+Update: 72/130 | Steps: 4423680 | SPS: 8784 | Ret: 23.25 | Len: 123.8 | Goal: 19.0% | v_loss: 16.2428 | approx_kl: 0.0088
+Update: 73/130 | Steps: 4485120 | SPS: 8792 | Ret: 21.19 | Len: 121.7 | Goal: 11.0% | v_loss: 18.2368 | approx_kl: 0.0080
+Update: 74/130 | Steps: 4546560 | SPS: 8799 | Ret: 25.46 | Len: 114.0 | Goal: 16.0% | v_loss: 14.1981 | approx_kl: 0.0058
+Update: 75/130 | Steps: 4608000 | SPS: 8805 | Ret: 24.62 | Len: 131.4 | Goal: 18.0% | v_loss: 14.1252 | approx_kl: 0.0071
+Update: 76/130 | Steps: 4669440 | SPS: 8813 | Ret: 20.59 | Len: 111.9 | Goal: 10.0% | v_loss: 17.3822 | approx_kl: 0.0043
+Update: 77/130 | Steps: 4730880 | SPS: 8819 | Ret: 16.84 | Len: 86.9 | Goal: 13.0% | v_loss: 16.8490 | approx_kl: 0.0109
+Update: 78/130 | Steps: 4792320 | SPS: 8824 | Ret: 24.09 | Len: 107.7 | Goal: 17.0% | v_loss: 16.3862 | approx_kl: 0.0061
+Update: 79/130 | Steps: 4853760 | SPS: 8829 | Ret: 26.41 | Len: 142.5 | Goal: 15.0% | v_loss: 19.0543 | approx_kl: 0.0065
+Update: 80/130 | Steps: 4915200 | SPS: 8833 | Ret: 23.82 | Len: 110.0 | Goal: 15.0% | v_loss: 17.4148 | approx_kl: 0.0092
+Update: 81/130 | Steps: 4976640 | SPS: 8838 | Ret: 26.82 | Len: 114.2 | Goal: 19.0% | v_loss: 17.3650 | approx_kl: 0.0061
+Update: 82/130 | Steps: 5038080 | SPS: 8842 | Ret: 28.83 | Len: 122.4 | Goal: 19.0% | v_loss: 17.1535 | approx_kl: 0.0039
+Update: 83/130 | Steps: 5099520 | SPS: 8846 | Ret: 21.39 | Len: 89.5 | Goal: 15.0% | v_loss: 18.3952 | approx_kl: 0.0059
+Update: 84/130 | Steps: 5160960 | SPS: 8851 | Ret: 18.47 | Len: 118.1 | Goal: 17.0% | v_loss: 17.1325 | approx_kl: 0.0095
+Update: 85/130 | Steps: 5222400 | SPS: 8855 | Ret: 25.20 | Len: 102.2 | Goal: 12.0% | v_loss: 19.7129 | approx_kl: 0.0063
+Update: 86/130 | Steps: 5283840 | SPS: 8860 | Ret: 24.97 | Len: 76.7 | Goal: 16.0% | v_loss: 18.7746 | approx_kl: 0.0074
+Update: 87/130 | Steps: 5345280 | SPS: 8865 | Ret: 25.14 | Len: 138.0 | Goal: 17.0% | v_loss: 16.7035 | approx_kl: 0.0073
+Update: 88/130 | Steps: 5406720 | SPS: 8868 | Ret: 26.61 | Len: 104.7 | Goal: 21.0% | v_loss: 16.6910 | approx_kl: 0.0067
+Update: 89/130 | Steps: 5468160 | SPS: 8871 | Ret: 31.32 | Len: 111.8 | Goal: 25.0% | v_loss: 19.9088 | approx_kl: 0.0056
+Update: 90/130 | Steps: 5529600 | SPS: 8875 | Ret: 23.09 | Len: 87.3 | Goal: 19.0% | v_loss: 20.4746 | approx_kl: 0.0083
+Update: 91/130 | Steps: 5591040 | SPS: 8878 | Ret: 22.30 | Len: 80.3 | Goal: 21.0% | v_loss: 25.4654 | approx_kl: 0.0046
+Update: 92/130 | Steps: 5652480 | SPS: 8881 | Ret: 27.92 | Len: 97.8 | Goal: 19.0% | v_loss: 22.0714 | approx_kl: 0.0077
+Update: 93/130 | Steps: 5713920 | SPS: 8883 | Ret: 26.84 | Len: 87.0 | Goal: 22.0% | v_loss: 20.0821 | approx_kl: 0.0049
+Update: 94/130 | Steps: 5775360 | SPS: 8886 | Ret: 24.27 | Len: 109.7 | Goal: 14.0% | v_loss: 21.9925 | approx_kl: 0.0046
+Update: 95/130 | Steps: 5836800 | SPS: 8890 | Ret: 33.24 | Len: 111.3 | Goal: 20.0% | v_loss: 19.5367 | approx_kl: 0.0050
+Update: 96/130 | Steps: 5898240 | SPS: 8895 | Ret: 30.16 | Len: 115.6 | Goal: 22.0% | v_loss: 23.5358 | approx_kl: 0.0085
+Update: 97/130 | Steps: 5959680 | SPS: 8899 | Ret: 27.01 | Len: 90.3 | Goal: 16.0% | v_loss: 23.5803 | approx_kl: 0.0096
+
+[Callback] Recording evaluation episode at step 6000000...
+[Callback] Replay saved: ./replays/replay_step_6000000.json (29 frames)
+
+Update: 98/130 | Steps: 6021120 | SPS: 8883 | Ret: 19.04 | Len: 76.3 | Goal: 9.0% | v_loss: 18.4941 | approx_kl: 0.0078
+Update: 99/130 | Steps: 6082560 | SPS: 8886 | Ret: 28.42 | Len: 93.8 | Goal: 21.0% | v_loss: 18.4987 | approx_kl: 0.0076
+Update: 100/130 | Steps: 6144000 | SPS: 8888 | Ret: 26.89 | Len: 100.2 | Goal: 25.0% | v_loss: 20.7340 | approx_kl: 0.0039
+Update: 101/130 | Steps: 6205440 | SPS: 8889 | Ret: 24.87 | Len: 98.3 | Goal: 14.0% | v_loss: 21.7941 | approx_kl: 0.0073
+Update: 102/130 | Steps: 6266880 | SPS: 8891 | Ret: 23.01 | Len: 61.6 | Goal: 7.0% | v_loss: 21.0658 | approx_kl: 0.0039
+Update: 103/130 | Steps: 6328320 | SPS: 8894 | Ret: 32.44 | Len: 98.4 | Goal: 18.0% | v_loss: 20.8512 | approx_kl: 0.0043
+Update: 104/130 | Steps: 6389760 | SPS: 8895 | Ret: 21.36 | Len: 86.5 | Goal: 18.0% | v_loss: 23.4037 | approx_kl: 0.0044
+Update: 105/130 | Steps: 6451200 | SPS: 8899 | Ret: 24.74 | Len: 88.4 | Goal: 13.0% | v_loss: 21.8467 | approx_kl: 0.0066
+Update: 106/130 | Steps: 6512640 | SPS: 8901 | Ret: 31.40 | Len: 89.4 | Goal: 21.0% | v_loss: 23.7666 | approx_kl: 0.0052
+Update: 107/130 | Steps: 6574080 | SPS: 8903 | Ret: 26.12 | Len: 123.0 | Goal: 16.0% | v_loss: 22.1357 | approx_kl: 0.0080
+Update: 108/130 | Steps: 6635520 | SPS: 8906 | Ret: 24.32 | Len: 98.0 | Goal: 20.0% | v_loss: 21.5411 | approx_kl: 0.0078
+Update: 109/130 | Steps: 6696960 | SPS: 8909 | Ret: 31.95 | Len: 87.2 | Goal: 15.0% | v_loss: 23.3220 | approx_kl: 0.0068
+Update: 110/130 | Steps: 6758400 | SPS: 8911 | Ret: 34.12 | Len: 111.0 | Goal: 21.0% | v_loss: 21.9772 | approx_kl: 0.0089
+Update: 111/130 | Steps: 6819840 | SPS: 8913 | Ret: 18.65 | Len: 95.4 | Goal: 15.0% | v_loss: 20.9178 | approx_kl: 0.0056
+Update: 112/130 | Steps: 6881280 | SPS: 8915 | Ret: 26.84 | Len: 110.5 | Goal: 21.0% | v_loss: 21.4939 | approx_kl: 0.0061
+Update: 113/130 | Steps: 6942720 | SPS: 8917 | Ret: 22.11 | Len: 79.5 | Goal: 13.0% | v_loss: 19.7570 | approx_kl: 0.0078
+Update: 114/130 | Steps: 7004160 | SPS: 8918 | Ret: 31.58 | Len: 98.2 | Goal: 19.0% | v_loss: 21.1492 | approx_kl: 0.0050
+Update: 115/130 | Steps: 7065600 | SPS: 8920 | Ret: 22.62 | Len: 98.0 | Goal: 16.0% | v_loss: 23.6211 | approx_kl: 0.0035
+Update: 116/130 | Steps: 7127040 | SPS: 8921 | Ret: 26.50 | Len: 64.5 | Goal: 13.0% | v_loss: 21.4066 | approx_kl: 0.0053
+Update: 117/130 | Steps: 7188480 | SPS: 8922 | Ret: 31.26 | Len: 81.4 | Goal: 22.0% | v_loss: 22.8118 | approx_kl: 0.0063
+Update: 118/130 | Steps: 7249920 | SPS: 8923 | Ret: 37.31 | Len: 105.8 | Goal: 32.0% | v_loss: 23.9680 | approx_kl: 0.0016
+Update: 119/130 | Steps: 7311360 | SPS: 8922 | Ret: 22.31 | Len: 60.1 | Goal: 16.0% | v_loss: 24.9416 | approx_kl: 0.0013
+Update: 120/130 | Steps: 7372800 | SPS: 8925 | Ret: 21.24 | Len: 75.7 | Goal: 15.0% | v_loss: 23.9682 | approx_kl: 0.0027
+Update: 121/130 | Steps: 7434240 | SPS: 8925 | Ret: 32.33 | Len: 98.0 | Goal: 17.0% | v_loss: 23.1041 | approx_kl: 0.0053
+Update: 122/130 | Steps: 7495680 | SPS: 8926 | Ret: 22.51 | Len: 76.3 | Goal: 17.0% | v_loss: 23.9013 | approx_kl: 0.0011
+Update: 123/130 | Steps: 7557120 | SPS: 8927 | Ret: 33.02 | Len: 130.3 | Goal: 26.0% | v_loss: 24.0855 | approx_kl: 0.0014
+Update: 124/130 | Steps: 7618560 | SPS: 8928 | Ret: 27.70 | Len: 73.6 | Goal: 25.0% | v_loss: 27.9193 | approx_kl: 0.0027
+Update: 125/130 | Steps: 7680000 | SPS: 8928 | Ret: 27.59 | Len: 65.2 | Goal: 21.0% | v_loss: 23.9246 | approx_kl: 0.0009
+Update: 126/130 | Steps: 7741440 | SPS: 8928 | Ret: 34.18 | Len: 77.0 | Goal: 17.0% | v_loss: 24.2214 | approx_kl: 0.0004
+Update: 127/130 | Steps: 7802880 | SPS: 8929 | Ret: 23.66 | Len: 81.9 | Goal: 11.0% | v_loss: 23.7698 | approx_kl: 0.0016
+Update: 128/130 | Steps: 7864320 | SPS: 8929 | Ret: 31.94 | Len: 78.8 | Goal: 12.0% | v_loss: 25.6770 | approx_kl: 0.0014
+Update: 129/130 | Steps: 7925760 | SPS: 8930 | Ret: 30.12 | Len: 66.9 | Goal: 17.0% | v_loss: 24.0136 | approx_kl: 0.0007
+Update: 130/130 | Steps: 7987200 | SPS: 8931 | Ret: 19.09 | Len: 70.2 | Goal: 19.0% | v_loss: 25.8042 | approx_kl: 0.0033
+Successfully exported parallel PyTorch model to ONNX.
+(gan_env) teaching@dslab:~/pathon$ 

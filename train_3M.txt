@@ -1,0 +1,68 @@
+(gan_env) teaching@dslab:~/pathon$ python train1.py 
+Training on device: CUDA with Shared CPU Memory & AMP
+Update: 1/48 | Steps: 61440 | SPS: 5206 | Ret: -4.30 | Len: 119.5 | Goal: 0.0% | v_loss: 4.3982 | approx_kl: 0.0059
+Update: 2/48 | Steps: 122880 | SPS: 5623 | Ret: -7.90 | Len: 120.8 | Goal: 1.0% | v_loss: 4.0955 | approx_kl: 0.0073
+Update: 3/48 | Steps: 184320 | SPS: 5772 | Ret: -4.00 | Len: 115.2 | Goal: 0.0% | v_loss: 3.6537 | approx_kl: 0.0082
+Update: 4/48 | Steps: 245760 | SPS: 5947 | Ret: -2.25 | Len: 196.7 | Goal: 0.0% | v_loss: 3.4698 | approx_kl: 0.0101
+Update: 5/48 | Steps: 307200 | SPS: 5975 | Ret: -2.93 | Len: 127.4 | Goal: 0.0% | v_loss: 4.5044 | approx_kl: 0.0096
+Update: 6/48 | Steps: 368640 | SPS: 6055 | Ret: -3.22 | Len: 168.8 | Goal: 1.0% | v_loss: 4.0027 | approx_kl: 0.0042
+Update: 7/48 | Steps: 430080 | SPS: 6101 | Ret: -0.07 | Len: 182.2 | Goal: 0.0% | v_loss: 3.7327 | approx_kl: 0.0065
+Update: 8/48 | Steps: 491520 | SPS: 6150 | Ret: 4.41 | Len: 181.2 | Goal: 0.0% | v_loss: 4.0431 | approx_kl: 0.0083
+Update: 9/48 | Steps: 552960 | SPS: 6198 | Ret: -3.44 | Len: 184.0 | Goal: 0.0% | v_loss: 4.0677 | approx_kl: 0.0084
+Update: 10/48 | Steps: 614400 | SPS: 6220 | Ret: -1.55 | Len: 175.7 | Goal: 2.0% | v_loss: 4.7656 | approx_kl: 0.0090
+Update: 11/48 | Steps: 675840 | SPS: 6243 | Ret: 1.48 | Len: 149.7 | Goal: 0.0% | v_loss: 4.3740 | approx_kl: 0.0065
+
+[Callback] Recording evaluation episode at step 700020...
+[Callback] Replay saved: ./replays/replay_step_700020.json (37 frames)
+
+Update: 12/48 | Steps: 737280 | SPS: 6151 | Ret: -1.48 | Len: 148.4 | Goal: 0.0% | v_loss: 4.0572 | approx_kl: 0.0055
+Update: 13/48 | Steps: 798720 | SPS: 6184 | Ret: 6.67 | Len: 154.8 | Goal: 2.0% | v_loss: 3.9530 | approx_kl: 0.0072
+Update: 14/48 | Steps: 860160 | SPS: 6186 | Ret: 4.20 | Len: 165.2 | Goal: 2.0% | v_loss: 4.2928 | approx_kl: 0.0062
+Update: 15/48 | Steps: 921600 | SPS: 6177 | Ret: 7.21 | Len: 162.0 | Goal: 6.0% | v_loss: 4.4669 | approx_kl: 0.0045
+Update: 16/48 | Steps: 983040 | SPS: 6169 | Ret: 2.90 | Len: 129.3 | Goal: 0.0% | v_loss: 4.7970 | approx_kl: 0.0066
+Update: 17/48 | Steps: 1044480 | SPS: 6170 | Ret: 6.22 | Len: 121.7 | Goal: 1.0% | v_loss: 4.4930 | approx_kl: 0.0043
+Update: 18/48 | Steps: 1105920 | SPS: 6108 | Ret: 12.23 | Len: 117.1 | Goal: 6.0% | v_loss: 6.5179 | approx_kl: 0.0063
+Update: 19/48 | Steps: 1167360 | SPS: 5988 | Ret: 13.17 | Len: 128.2 | Goal: 8.0% | v_loss: 5.7648 | approx_kl: 0.0076
+Update: 20/48 | Steps: 1228800 | SPS: 5884 | Ret: 10.04 | Len: 105.2 | Goal: 6.0% | v_loss: 6.0658 | approx_kl: 0.0052
+Update: 21/48 | Steps: 1290240 | SPS: 5794 | Ret: 11.74 | Len: 95.9 | Goal: 3.0% | v_loss: 5.1767 | approx_kl: 0.0052
+Update: 22/48 | Steps: 1351680 | SPS: 5699 | Ret: 6.29 | Len: 110.6 | Goal: 4.0% | v_loss: 5.8346 | approx_kl: 0.0072
+
+[Callback] Recording evaluation episode at step 1400010...
+[Callback] Replay saved: ./replays/replay_step_1400010.json (104 frames)
+
+Update: 23/48 | Steps: 1413120 | SPS: 5514 | Ret: 14.05 | Len: 136.9 | Goal: 5.0% | v_loss: 6.2714 | approx_kl: 0.0046
+Update: 24/48 | Steps: 1474560 | SPS: 5443 | Ret: 6.57 | Len: 109.9 | Goal: 3.0% | v_loss: 6.2566 | approx_kl: 0.0057
+Update: 25/48 | Steps: 1536000 | SPS: 5395 | Ret: 14.94 | Len: 132.1 | Goal: 7.0% | v_loss: 6.1812 | approx_kl: 0.0054
+Update: 26/48 | Steps: 1597440 | SPS: 5349 | Ret: 17.60 | Len: 122.9 | Goal: 4.0% | v_loss: 5.9071 | approx_kl: 0.0066
+Update: 27/48 | Steps: 1658880 | SPS: 5278 | Ret: 18.65 | Len: 121.5 | Goal: 11.0% | v_loss: 7.0263 | approx_kl: 0.0098
+Update: 28/48 | Steps: 1720320 | SPS: 5203 | Ret: 11.73 | Len: 90.4 | Goal: 8.0% | v_loss: 7.3203 | approx_kl: 0.0058
+Update: 29/48 | Steps: 1781760 | SPS: 5168 | Ret: 16.05 | Len: 140.7 | Goal: 11.0% | v_loss: 7.2705 | approx_kl: 0.0056
+Update: 30/48 | Steps: 1843200 | SPS: 5142 | Ret: 18.29 | Len: 131.0 | Goal: 7.0% | v_loss: 7.7404 | approx_kl: 0.0079
+Update: 31/48 | Steps: 1904640 | SPS: 5098 | Ret: 15.80 | Len: 104.5 | Goal: 3.0% | v_loss: 8.5212 | approx_kl: 0.0059
+Update: 32/48 | Steps: 1966080 | SPS: 5063 | Ret: 16.09 | Len: 97.2 | Goal: 8.0% | v_loss: 8.8021 | approx_kl: 0.0058
+Update: 33/48 | Steps: 2027520 | SPS: 5027 | Ret: 13.05 | Len: 73.9 | Goal: 6.0% | v_loss: 9.9506 | approx_kl: 0.0076
+Update: 34/48 | Steps: 2088960 | SPS: 4990 | Ret: 14.95 | Len: 77.3 | Goal: 7.0% | v_loss: 10.4375 | approx_kl: 0.0058
+
+[Callback] Recording evaluation episode at step 2100000...
+[Callback] Replay saved: ./replays/replay_step_2100000.json (199 frames)
+
+Update: 35/48 | Steps: 2150400 | SPS: 4850 | Ret: 13.99 | Len: 79.0 | Goal: 4.0% | v_loss: 10.8903 | approx_kl: 0.0072
+Update: 36/48 | Steps: 2211840 | SPS: 4826 | Ret: 23.01 | Len: 108.8 | Goal: 10.0% | v_loss: 10.2870 | approx_kl: 0.0087
+Update: 37/48 | Steps: 2273280 | SPS: 4802 | Ret: 18.01 | Len: 70.0 | Goal: 7.0% | v_loss: 13.4892 | approx_kl: 0.0054
+Update: 38/48 | Steps: 2334720 | SPS: 4769 | Ret: 20.07 | Len: 78.8 | Goal: 12.0% | v_loss: 11.3231 | approx_kl: 0.0045
+Update: 39/48 | Steps: 2396160 | SPS: 4731 | Ret: 18.15 | Len: 78.0 | Goal: 5.0% | v_loss: 11.6720 | approx_kl: 0.0063
+Update: 40/48 | Steps: 2457600 | SPS: 4697 | Ret: 18.04 | Len: 72.4 | Goal: 6.0% | v_loss: 13.0279 | approx_kl: 0.0058
+Update: 41/48 | Steps: 2519040 | SPS: 4661 | Ret: 18.98 | Len: 65.4 | Goal: 11.0% | v_loss: 13.0774 | approx_kl: 0.0047
+Update: 42/48 | Steps: 2580480 | SPS: 4628 | Ret: 19.53 | Len: 67.6 | Goal: 10.0% | v_loss: 13.2741 | approx_kl: 0.0060
+Update: 43/48 | Steps: 2641920 | SPS: 4593 | Ret: 20.50 | Len: 84.2 | Goal: 10.0% | v_loss: 12.1338 | approx_kl: 0.0043
+Update: 44/48 | Steps: 2703360 | SPS: 4563 | Ret: 19.26 | Len: 80.5 | Goal: 8.0% | v_loss: 12.0806 | approx_kl: 0.0022
+Update: 45/48 | Steps: 2764800 | SPS: 4550 | Ret: 22.48 | Len: 73.4 | Goal: 7.0% | v_loss: 13.1950 | approx_kl: 0.0029
+
+[Callback] Recording evaluation episode at step 2800020...
+[Callback] Replay saved: ./replays/replay_step_2800020.json (236 frames)
+
+Update: 46/48 | Steps: 2826240 | SPS: 4453 | Ret: 15.37 | Len: 77.1 | Goal: 4.0% | v_loss: 13.5024 | approx_kl: 0.0032
+Update: 47/48 | Steps: 2887680 | SPS: 4446 | Ret: 20.20 | Len: 70.0 | Goal: 12.0% | v_loss: 13.2615 | approx_kl: 0.0058
+Update: 48/48 | Steps: 2949120 | SPS: 4438 | Ret: 19.93 | Len: 74.8 | Goal: 11.0% | v_loss: 13.4216 | approx_kl: 0.0088
+Successfully exported parallel PyTorch model to ONNX.
+(gan_env) teaching@dslab:~/pathon$ 

@@ -26,7 +26,7 @@ class PathonEnvWrapper:
     def reset(self):
         self.step_count = 0
         fov_raw, lidar_raw, grad_raw = self.env.reset_env()
-        fov_np = np.frombuffer(fov_raw, dtype=np.uint8).reshape((15, 15)).copy()
+        fov_np = np.frombuffer(fov_raw, dtype=np.uint8).reshape((25, 25)).copy()
         lidar_np = np.array(lidar_raw, dtype=np.float32)
         grad_np = np.array(grad_raw, dtype=np.float32)
 
@@ -41,7 +41,7 @@ class PathonEnvWrapper:
         self.step_count += 1
         fov_raw, lidar_raw, grad_raw, reward, terminated, reached_goal = self.env.step_action(int(action))
         
-        fov_np = np.frombuffer(fov_raw, dtype=np.uint8).reshape((15, 15)).copy()
+        fov_np = np.frombuffer(fov_raw, dtype=np.uint8).reshape((25, 25)).copy()
         lidar_np = np.array(lidar_raw, dtype=np.float32)
         grad_np = np.array(grad_raw, dtype=np.float32)
 
@@ -75,6 +75,10 @@ def shared_worker(env_idx, remote, parent_remote, shared_fov, shared_lidar, shar
             
             remote.send(True)
         
+        elif cmd == 'set_density':
+            env.env.obstacle_density = action  # action reused as the value
+            remote.send(True)
+    
         elif cmd == 'reset':
             fov, lidar, grad = env.reset()
             shared_fov[env_idx] = torch.from_numpy(fov)
@@ -92,7 +96,7 @@ class SharedMemoryVecEnv:
         self.num_envs = num_envs
         
         # Pre-allocate RAM and share memory across processes
-        self.shared_fov = torch.zeros((num_envs, 4, 15, 15), dtype=torch.float32).share_memory_()
+        self.shared_fov = torch.zeros((num_envs, 4, 25, 25), dtype=torch.float32).share_memory_()
         self.shared_lidar = torch.zeros((num_envs, 32), dtype=torch.float32).share_memory_()
         self.shared_grad = torch.zeros((num_envs, 8), dtype=torch.float32).share_memory_()
         self.shared_reward = torch.zeros((num_envs,), dtype=torch.float32).share_memory_()
@@ -112,6 +116,11 @@ class SharedMemoryVecEnv:
             
         for remote in self.work_remotes:
             remote.close()
+
+    def set_density(self, density):
+        for remote in self.remotes:
+            remote.send(('set_density', density))
+        [remote.recv() for remote in self.remotes]
 
     def step(self, actions):
         for remote, action in zip(self.remotes, actions):
@@ -147,11 +156,16 @@ class ActorCritic(nn.Module):
             nn.Flatten()
         )
         self.fc = nn.Sequential(
-            nn.Linear(1608, 256),
+            nn.Linear(4608 + 32 + 8, 256),
             nn.ReLU(),
             nn.Linear(256, 256),
             nn.ReLU()
         )
+        with torch.no_grad():
+            dummy = torch.zeros(1, 4, 25, 25)
+            cnn_out = self.cnn(dummy)
+            assert cnn_out.shape[1] == 4608, f"CNN output dim mismatch: {cnn_out.shape[1]}"
+        
         self.actor = nn.Linear(256, 8)
         self.critic = nn.Linear(256, 1)
 
@@ -178,24 +192,24 @@ def train_ppo():
     env = SharedMemoryVecEnv(num_envs=num_envs)
     
     agent = ActorCritic().to(device)
-    optimizer = optim.Adam(agent.parameters(), lr=3e-4, eps=1e-5)
+    optimizer = optim.Adam(agent.parameters(), lr=1e-4, eps=1e-5)
     scaler = torch.amp.GradScaler('cuda') # Automatic Mixed Precision Scaler
 
-    total_timesteps = 2_000_000
-    num_steps = 1024 
+    total_timesteps = 8_000_000
+    num_steps = 2048
     batch_size = 4096 
-    n_epochs = 10
+    n_epochs = 4
     gamma = 0.99
     gae_lambda = 0.95
     clip_coef = 0.2
-    ent_coef = 0.01
-    vf_coef = 0.5
-    record_freq = 300000
+    ent_coef = 0.05
+    vf_coef = 1.0
+    record_freq = 2_000_000
     replay_dir = "./replays"
     os.makedirs(replay_dir, exist_ok=True)
     
     # Storage Buffers in VRAM
-    obs_fov = torch.zeros((num_steps, num_envs, 4, 15, 15), dtype=torch.float32, device=device)
+    obs_fov = torch.zeros((num_steps, num_envs, 4, 25, 25), dtype=torch.float32, device=device)
     obs_lidar = torch.zeros((num_steps, num_envs, 32), dtype=torch.float32, device=device)
     obs_grad = torch.zeros((num_steps, num_envs, 8), dtype=torch.float32, device=device)
     actions = torch.zeros((num_steps, num_envs), dtype=torch.float32, device=device)
@@ -223,6 +237,9 @@ def train_ppo():
     num_updates = total_timesteps // (num_steps * num_envs)
 
     for update in range(1, num_updates + 1):
+        difficulty = min(1.0, global_step / 4_000_000)
+        target_density = int(5 + difficulty * 10)
+        env.set_density(target_density)
         for step in range(num_steps):
             global_step += num_envs
             obs_fov[step] = next_fov
@@ -270,7 +287,7 @@ def train_ppo():
                 
                 fv, lv, (gx, gy) = record_env.reset_env()
                 for _ in range(4):
-                    r_fov_hist.append(np.frombuffer(fv, dtype=np.uint8).reshape((15, 15)).copy())
+                    r_fov_hist.append(np.frombuffer(fv, dtype=np.uint8).reshape((25, 25)).copy())
                     r_lidar_hist.append(np.array(lv, dtype=np.float32))
                     r_grad_hist.append(np.array([gx, gy], dtype=np.float32))
                 
@@ -286,7 +303,7 @@ def train_ppo():
                     r_done = term
                     frames.append(json.loads(record_env.get_state_json()))
                     
-                    r_fov_hist.append(np.frombuffer(fv, dtype=np.uint8).reshape((15, 15)).copy())
+                    r_fov_hist.append(np.frombuffer(fv, dtype=np.uint8).reshape((25, 25)).copy())
                     r_lidar_hist.append(np.array(lv, dtype=np.float32))
                     r_grad_hist.append(np.array([gx, gy], dtype=np.float32))
                     r_step += 1
@@ -312,7 +329,7 @@ def train_ppo():
                 advantages[t] = lastgaelam = delta + gamma * gae_lambda * nextnonterminal * lastgaelam
             returns = advantages + values
 
-        b_obs_fov = obs_fov.reshape((-1, 4, 15, 15))
+        b_obs_fov = obs_fov.reshape((-1, 4, 25, 25))
         b_obs_lidar = obs_lidar.reshape((-1, 32))
         b_obs_grad = obs_grad.reshape((-1, 8))
         b_logprobs = logprobs.reshape(-1)
@@ -321,6 +338,9 @@ def train_ppo():
         b_returns = returns.reshape(-1)
         b_values = values.reshape(-1)
 
+        frac = 1.0 - (update - 1.0) / num_updates
+        optimizer.param_groups[0]["lr"] = 1e-4 * frac
+        ent_coef_now = 0.05 * frac
         b_inds = np.arange(num_steps * num_envs)
         for epoch in range(n_epochs):
             np.random.shuffle(b_inds)
@@ -349,7 +369,7 @@ def train_ppo():
                     v_loss = 0.5 * ((newvalue - b_returns[mb_inds]) ** 2).mean()
 
                     entropy_loss = entropy.mean()
-                    loss = pg_loss - ent_coef * entropy_loss + v_loss * vf_coef
+                    loss = pg_loss - ent_coef_now * entropy_loss + v_loss * vf_coef
 
                 optimizer.zero_grad()
                 scaler.scale(loss).backward()
@@ -366,6 +386,8 @@ def train_ppo():
         print(f"Update: {update}/{num_updates} | Steps: {global_step} | SPS: {sps} | "
               f"Ret: {avg_ret:.2f} | Len: {avg_len:.1f} | Goal: {goal_rate*100:.1f}% | "
               f"v_loss: {v_loss.item():.4f} | approx_kl: {approx_kl.item():.4f}")
+        if update % 10 == 0:  # ADD HERE
+            torch.save(agent.state_dict(), f"checkpoints/ppo_step_{global_step}.pth")
 
     env.close()
     return agent
@@ -388,7 +410,7 @@ if __name__ == '__main__':
     # Export to ONNX
     onnx_model = OnnxWrapper(trained_agent).cpu()
     dummy_obs = {
-        "fov": torch.zeros((1, 4, 15, 15), dtype=torch.float32),
+        "fov": torch.zeros((1, 4, 25, 25), dtype=torch.float32),
         "lidar": torch.zeros((1, 32), dtype=torch.float32),
         "grad": torch.zeros((1, 8), dtype=torch.float32),
     }

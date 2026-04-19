@@ -82,7 +82,7 @@ impl GridEnv {
             flow_field: FlowField::new(width, height),
             fov: vec![0; 225],
             manual_override: false,
-            obstacle_density: 15,
+            obstacle_density: 5,
             velocity_multiplier: 1.0,
             goal_reach_count: 0,
             collision_count: 0,
@@ -183,7 +183,7 @@ impl GridEnv {
             self.obstacles.pop();
         }
 
-        self.fov = self.get_local_fov(15);
+        self.fov = self.get_local_fov(25);
         self.lidar = self.get_lidar_readings();
 
         let (gx, gy) = self.get_flow_gradient(self.agent_pos.0, self.agent_pos.1);
@@ -202,7 +202,7 @@ impl GridEnv {
 
     pub fn reset_env(&mut self) -> (Vec<u8>, Vec<f32>, (f32, f32)) {
         self.reset_with_random_layout();
-        self.fov = self.get_local_fov(15);
+        self.fov = self.get_local_fov(25);
         self.lidar = self.get_lidar_readings();
 
         self.fov_history.clear();
@@ -309,21 +309,27 @@ impl GridEnv {
         } else {
             prev_dist - current_dist
         };
-        reward -= 0.01;
 
         for l in &self.lidar {
             if *l < 2.0 {
-                reward -= 0.1;
+                reward -= 0.02;
             }
         }
 
-        if collided_wall || collided_obs {
-            reward -= 2.5;
+        let terminated = collided_wall || reached_goal; // remove collided_obs
+
+        if collided_wall {
+            reward -= 5.0;
+            self.collision_count += 1;
+        } else if collided_obs {
+            reward -= 2.0; // penalty but no death
             self.collision_count += 1;
         } else if reached_goal {
-            reward += 10.0;
+            reward += 20.0;
             self.goal_reach_count += 1;
         }
+
+        reward -= 0.005;
 
         let (gx, gy) = self.get_flow_gradient(self.agent_pos.0, self.agent_pos.1);
 
@@ -451,7 +457,7 @@ impl GridEnv {
 
         self.flow_field.update(self.goal_pos, &self.static_grid);
 
-        for _ in 0..15 {
+        for _ in 0..5 {
             self.spawn_random_obstacle();
         }
     }
@@ -473,8 +479,8 @@ impl GridEnv {
                 y,
                 vx: rng.gen_range(-1..=1),
                 vy: rng.gen_range(-1..=1),
-                width: 8,
-                height: 8,
+                width: 5,
+                height: 5,
             },
             1 => {
                 // Long, slow snake
@@ -487,9 +493,9 @@ impl GridEnv {
                     body,
                     vx: rng.gen_range(-1..=1),
                     vy: rng.gen_range(-1..=1),
-                    thickness: 8,
+                    thickness: 4,
                     tick_counter: 0,
-                    speed_delay: rng.gen_range(2..5), // Slow updates
+                    speed_delay: rng.gen_range(4..7), // Slow updates
                 }
             }
             2 => {
@@ -503,9 +509,9 @@ impl GridEnv {
                     body,
                     vx: if rng.gen::<bool>() { 1 } else { -1 },
                     vy: if rng.gen::<bool>() { 1 } else { -1 },
-                    thickness: rng.gen_range(2..5),
+                    thickness: rng.gen_range(2..3),
                     tick_counter: 0,
-                    speed_delay: 1, // Fast updates
+                    speed_delay: 3, // Fast updates
                 }
             }
             _ => {
@@ -517,11 +523,11 @@ impl GridEnv {
                 }
                 ObstacleType::Snake {
                     body,
-                    vx: rng.gen_range(-2..=2),
-                    vy: rng.gen_range(-2..=2), // Moving diagonally faster
-                    thickness: rng.gen_range(2..6),
+                    vx: rng.gen_range(-1..=1),
+                    vy: rng.gen_range(-1..=1), // Moving diagonally faster
+                    thickness: rng.gen_range(2..3),
                     tick_counter: 0,
-                    speed_delay: rng.gen_range(1..3),
+                    speed_delay: rng.gen_range(2..4),
                 }
             }
         };
@@ -747,7 +753,7 @@ impl GridEnv {
     pub fn move_agent(&mut self, x: i32, y: i32) {
         if x >= 0 && x < self.width && y >= 0 && y < self.height {
             self.agent_pos = (x, y);
-            self.fov = self.get_local_fov(15);
+            self.fov = self.get_local_fov(25);
             self.lidar = self.get_lidar_readings();
         }
     }
@@ -777,7 +783,7 @@ impl GridEnv {
                     *y = target_y;
                 }
             }
-            self.fov = self.get_local_fov(15);
+            self.fov = self.get_local_fov(25);
             self.lidar = self.get_lidar_readings();
         }
     }

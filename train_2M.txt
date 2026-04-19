@@ -1,0 +1,224 @@
+(gan_env) teaching@dslab:~/pathon$ python train1.py 
+Training on device: CUDA with Shared CPU Memory & AMP
+Update: 1/65 | Steps: 30720 | SPS: 1566 | Ret: -51.41 | Len: 53.5 | Goal: 0.0% | v_loss: 79.5300 | approx_kl: 0.0139
+
+[Callback] Recording evaluation episode at step 50010...
+[Callback] Replay saved: ./replays/replay_step_50010.json (5 frames)
+
+Update: 2/65 | Steps: 61440 | SPS: 1561 | Ret: -50.80 | Len: 73.8 | Goal: 0.0% | v_loss: 48.6712 | approx_kl: 0.0100
+Update: 3/65 | Steps: 92160 | SPS: 1570 | Ret: -52.80 | Len: 99.3 | Goal: 0.0% | v_loss: 35.1177 | approx_kl: 0.0114
+
+[Callback] Recording evaluation episode at step 100020...
+[Callback] Replay saved: ./replays/replay_step_100020.json (2 frames)
+
+Update: 4/65 | Steps: 122880 | SPS: 1588 | Ret: -45.53 | Len: 89.9 | Goal: 0.0% | v_loss: 42.2811 | approx_kl: 0.0096
+
+[Callback] Recording evaluation episode at step 150000...
+[Callback] Replay saved: ./replays/replay_step_150000.json (311 frames)
+
+Update: 5/65 | Steps: 153600 | SPS: 1385 | Ret: -45.51 | Len: 142.2 | Goal: 0.0% | v_loss: 30.8918 | approx_kl: 0.0076
+Update: 6/65 | Steps: 184320 | SPS: 1411 | Ret: -40.10 | Len: 160.8 | Goal: 1.0% | v_loss: 27.4052 | approx_kl: 0.0141
+
+[Callback] Recording evaluation episode at step 200010...
+[Callback] Replay saved: ./replays/replay_step_200010.json (159 frames)
+
+Update: 7/65 | Steps: 215040 | SPS: 1354 | Ret: -40.19 | Len: 143.7 | Goal: 0.0% | v_loss: 30.7327 | approx_kl: 0.0062
+Update: 8/65 | Steps: 245760 | SPS: 1379 | Ret: -39.80 | Len: 170.7 | Goal: 0.0% | v_loss: 22.9937 | approx_kl: 0.0070
+
+[Callback] Recording evaluation episode at step 250020...
+[Callback] Replay saved: ./replays/replay_step_250020.json (15 frames)
+
+Update: 9/65 | Steps: 276480 | SPS: 1384 | Ret: -43.12 | Len: 122.5 | Goal: 0.0% | v_loss: 27.5622 | approx_kl: 0.0081
+
+[Callback] Recording evaluation episode at step 300000...
+[Callback] Replay saved: ./replays/replay_step_300000.json (119 frames)
+
+Update: 10/65 | Steps: 307200 | SPS: 1357 | Ret: -34.46 | Len: 162.1 | Goal: 2.0% | v_loss: 36.6320 | approx_kl: 0.0067
+Update: 11/65 | Steps: 337920 | SPS: 1376 | Ret: -38.07 | Len: 135.6 | Goal: 0.0% | v_loss: 32.5488 | approx_kl: 0.0065
+
+[Callback] Recording evaluation episode at step 350010...
+[Callback] Replay saved: ./replays/replay_step_350010.json (11 frames)
+
+Update: 12/65 | Steps: 368640 | SPS: 1393 | Ret: -34.83 | Len: 146.4 | Goal: 3.0% | v_loss: 39.5729 | approx_kl: 0.0133
+Update: 13/65 | Steps: 399360 | SPS: 1405 | Ret: -27.21 | Len: 197.2 | Goal: 3.0% | v_loss: 34.1247 | approx_kl: 0.0109
+
+[Callback] Recording evaluation episode at step 400020...
+[Callback] Replay saved: ./replays/replay_step_400020.json (9 frames)
+
+Update: 14/65 | Steps: 430080 | SPS: 1415 | Ret: -35.08 | Len: 110.6 | Goal: 3.0% | v_loss: 52.4557 | approx_kl: 0.0091
+
+[Callback] Recording evaluation episode at step 450000...
+[Callback] Replay saved: ./replays/replay_step_450000.json (121 frames)
+
+Update: 15/65 | Steps: 460800 | SPS: 1399 | Ret: -28.64 | Len: 166.8 | Goal: 4.0% | v_loss: 38.6537 | approx_kl: 0.0149
+Update: 16/65 | Steps: 491520 | SPS: 1411 | Ret: -27.03 | Len: 145.7 | Goal: 5.0% | v_loss: 40.3637 | approx_kl: 0.0132
+
+[Callback] Recording evaluation episode at step 500010...
+[Callback] Replay saved: ./replays/replay_step_500010.json (8 frames)
+
+Update: 17/65 | Steps: 522240 | SPS: 1418 | Ret: -23.95 | Len: 175.7 | Goal: 6.0% | v_loss: 41.7541 | approx_kl: 0.0124
+
+[Callback] Recording evaluation episode at step 550020...
+[Callback] Replay saved: ./replays/replay_step_550020.json (1 frames)
+
+Update: 18/65 | Steps: 552960 | SPS: 1423 | Ret: -31.55 | Len: 140.3 | Goal: 2.0% | v_loss: 42.5552 | approx_kl: 0.0064
+Update: 19/65 | Steps: 583680 | SPS: 1430 | Ret: -23.18 | Len: 170.8 | Goal: 5.0% | v_loss: 45.9462 | approx_kl: 0.0107
+
+[Callback] Recording evaluation episode at step 600000...
+[Callback] Replay saved: ./replays/replay_step_600000.json (99 frames)
+
+Update: 20/65 | Steps: 614400 | SPS: 1419 | Ret: -18.09 | Len: 124.8 | Goal: 6.0% | v_loss: 63.7751 | approx_kl: 0.0224
+Update: 21/65 | Steps: 645120 | SPS: 1428 | Ret: -16.78 | Len: 126.6 | Goal: 5.0% | v_loss: 49.8918 | approx_kl: 0.0058
+
+[Callback] Recording evaluation episode at step 650010...
+[Callback] Replay saved: ./replays/replay_step_650010.json (210 frames)
+
+Update: 22/65 | Steps: 675840 | SPS: 1404 | Ret: -18.81 | Len: 110.8 | Goal: 6.0% | v_loss: 67.8561 | approx_kl: 0.0110
+
+[Callback] Recording evaluation episode at step 700020...
+[Callback] Replay saved: ./replays/replay_step_700020.json (7 frames)
+
+Update: 23/65 | Steps: 706560 | SPS: 1410 | Ret: -16.82 | Len: 104.4 | Goal: 5.0% | v_loss: 64.5252 | approx_kl: 0.0088
+Update: 24/65 | Steps: 737280 | SPS: 1416 | Ret: -15.03 | Len: 117.0 | Goal: 7.0% | v_loss: 78.2876 | approx_kl: 0.0127
+
+[Callback] Recording evaluation episode at step 750000...
+[Callback] Replay saved: ./replays/replay_step_750000.json (14 frames)
+
+Update: 25/65 | Steps: 768000 | SPS: 1420 | Ret: -18.11 | Len: 120.0 | Goal: 5.0% | v_loss: 66.7555 | approx_kl: 0.0099
+Update: 26/65 | Steps: 798720 | SPS: 1427 | Ret: -2.30 | Len: 116.8 | Goal: 12.0% | v_loss: 75.8673 | approx_kl: 0.0102
+
+[Callback] Recording evaluation episode at step 800010...
+[Callback] Replay saved: ./replays/replay_step_800010.json (486 frames)
+
+Update: 27/65 | Steps: 829440 | SPS: 1372 | Ret: -17.87 | Len: 100.2 | Goal: 4.0% | v_loss: 55.7990 | approx_kl: 0.0085
+
+[Callback] Recording evaluation episode at step 850020...
+[Callback] Replay saved: ./replays/replay_step_850020.json (1 frames)
+
+Update: 28/65 | Steps: 860160 | SPS: 1379 | Ret: -12.44 | Len: 112.3 | Goal: 9.0% | v_loss: 67.3916 | approx_kl: 0.0078
+Update: 29/65 | Steps: 890880 | SPS: 1386 | Ret: -3.77 | Len: 164.4 | Goal: 8.0% | v_loss: 71.7664 | approx_kl: 0.0078
+
+[Callback] Recording evaluation episode at step 900000...
+[Callback] Replay saved: ./replays/replay_step_900000.json (104 frames)
+
+Update: 30/65 | Steps: 921600 | SPS: 1381 | Ret: -17.81 | Len: 117.1 | Goal: 6.0% | v_loss: 81.6893 | approx_kl: 0.0080
+
+[Callback] Recording evaluation episode at step 950010...
+[Callback] Replay saved: ./replays/replay_step_950010.json (48 frames)
+
+Update: 31/65 | Steps: 952320 | SPS: 1381 | Ret: -20.51 | Len: 105.9 | Goal: 4.0% | v_loss: 83.8712 | approx_kl: 0.0134
+Update: 32/65 | Steps: 983040 | SPS: 1389 | Ret: -10.48 | Len: 110.2 | Goal: 11.0% | v_loss: 96.7816 | approx_kl: 0.0096
+
+[Callback] Recording evaluation episode at step 1000020...
+[Callback] Replay saved: ./replays/replay_step_1000020.json (4 frames)
+
+Update: 33/65 | Steps: 1013760 | SPS: 1394 | Ret: -7.35 | Len: 134.8 | Goal: 10.0% | v_loss: 73.1979 | approx_kl: 0.0123
+Update: 34/65 | Steps: 1044480 | SPS: 1399 | Ret: 2.44 | Len: 121.2 | Goal: 15.0% | v_loss: 100.4495 | approx_kl: 0.0109
+
+[Callback] Recording evaluation episode at step 1050000...
+[Callback] Replay saved: ./replays/replay_step_1050000.json (39 frames)
+
+Update: 35/65 | Steps: 1075200 | SPS: 1401 | Ret: -12.70 | Len: 120.8 | Goal: 9.0% | v_loss: 102.5856 | approx_kl: 0.0089
+
+[Callback] Recording evaluation episode at step 1100010...
+[Callback] Replay saved: ./replays/replay_step_1100010.json (226 frames)
+
+Update: 36/65 | Steps: 1105920 | SPS: 1385 | Ret: -1.81 | Len: 156.1 | Goal: 9.0% | v_loss: 82.4767 | approx_kl: 0.0095
+Update: 37/65 | Steps: 1136640 | SPS: 1388 | Ret: 0.27 | Len: 134.6 | Goal: 16.0% | v_loss: 89.5036 | approx_kl: 0.0065
+
+[Callback] Recording evaluation episode at step 1150020...
+[Callback] Replay saved: ./replays/replay_step_1150020.json (46 frames)
+
+Update: 38/65 | Steps: 1167360 | SPS: 1389 | Ret: -1.71 | Len: 136.2 | Goal: 11.0% | v_loss: 81.8541 | approx_kl: 0.0149
+Update: 39/65 | Steps: 1198080 | SPS: 1393 | Ret: -7.55 | Len: 117.7 | Goal: 10.0% | v_loss: 86.4270 | approx_kl: 0.0193
+
+[Callback] Recording evaluation episode at step 1200000...
+[Callback] Replay saved: ./replays/replay_step_1200000.json (70 frames)
+
+Update: 40/65 | Steps: 1228800 | SPS: 1393 | Ret: -0.00 | Len: 130.7 | Goal: 12.0% | v_loss: 98.4270 | approx_kl: 0.0094
+
+[Callback] Recording evaluation episode at step 1250010...
+[Callback] Replay saved: ./replays/replay_step_1250010.json (1000 frames)
+
+Update: 41/65 | Steps: 1259520 | SPS: 1325 | Ret: -11.64 | Len: 143.0 | Goal: 6.0% | v_loss: 76.4520 | approx_kl: 0.0097
+Update: 42/65 | Steps: 1290240 | SPS: 1332 | Ret: 1.28 | Len: 141.7 | Goal: 11.0% | v_loss: 89.7169 | approx_kl: 0.0064
+
+[Callback] Recording evaluation episode at step 1300020...
+[Callback] Replay saved: ./replays/replay_step_1300020.json (18 frames)
+
+Update: 43/65 | Steps: 1320960 | SPS: 1336 | Ret: -19.91 | Len: 125.7 | Goal: 9.0% | v_loss: 108.9500 | approx_kl: 0.0175
+
+[Callback] Recording evaluation episode at step 1350000...
+[Callback] Replay saved: ./replays/replay_step_1350000.json (114 frames)
+
+Update: 44/65 | Steps: 1351680 | SPS: 1332 | Ret: -12.69 | Len: 97.3 | Goal: 7.0% | v_loss: 103.3515 | approx_kl: 0.0127
+Update: 45/65 | Steps: 1382400 | SPS: 1337 | Ret: 9.30 | Len: 124.8 | Goal: 15.0% | v_loss: 88.2124 | approx_kl: 0.0117
+
+[Callback] Recording evaluation episode at step 1400010...
+[Callback] Replay saved: ./replays/replay_step_1400010.json (8 frames)
+
+Update: 46/65 | Steps: 1413120 | SPS: 1340 | Ret: 3.20 | Len: 114.2 | Goal: 15.0% | v_loss: 93.2013 | approx_kl: 0.0119
+Update: 47/65 | Steps: 1443840 | SPS: 1344 | Ret: 5.89 | Len: 145.9 | Goal: 11.0% | v_loss: 83.2667 | approx_kl: 0.0063
+
+[Callback] Recording evaluation episode at step 1450020...
+[Callback] Replay saved: ./replays/replay_step_1450020.json (185 frames)
+
+Update: 48/65 | Steps: 1474560 | SPS: 1338 | Ret: 2.96 | Len: 152.8 | Goal: 11.0% | v_loss: 99.2586 | approx_kl: 0.0138
+
+[Callback] Recording evaluation episode at step 1500000...
+[Callback] Replay saved: ./replays/replay_step_1500000.json (4 frames)
+
+Update: 49/65 | Steps: 1505280 | SPS: 1343 | Ret: 14.37 | Len: 152.7 | Goal: 15.0% | v_loss: 97.0501 | approx_kl: 0.0101
+Update: 50/65 | Steps: 1536000 | SPS: 1348 | Ret: -0.09 | Len: 113.0 | Goal: 12.0% | v_loss: 119.4107 | approx_kl: 0.0128
+
+[Callback] Recording evaluation episode at step 1550010...
+[Callback] Replay saved: ./replays/replay_step_1550010.json (3 frames)
+
+Update: 51/65 | Steps: 1566720 | SPS: 1352 | Ret: -16.23 | Len: 119.8 | Goal: 6.0% | v_loss: 86.9512 | approx_kl: 0.0085
+Update: 52/65 | Steps: 1597440 | SPS: 1356 | Ret: 0.70 | Len: 119.8 | Goal: 11.0% | v_loss: 95.1525 | approx_kl: 0.0127
+
+[Callback] Recording evaluation episode at step 1600020...
+[Callback] Replay saved: ./replays/replay_step_1600020.json (229 frames)
+
+Update: 53/65 | Steps: 1628160 | SPS: 1347 | Ret: -11.69 | Len: 104.0 | Goal: 7.0% | v_loss: 80.8881 | approx_kl: 0.0094
+
+[Callback] Recording evaluation episode at step 1650000...
+[Callback] Replay saved: ./replays/replay_step_1650000.json (11 frames)
+
+Update: 54/65 | Steps: 1658880 | SPS: 1350 | Ret: 10.64 | Len: 119.0 | Goal: 16.0% | v_loss: 94.5414 | approx_kl: 0.0067
+Update: 55/65 | Steps: 1689600 | SPS: 1354 | Ret: -10.16 | Len: 110.5 | Goal: 8.0% | v_loss: 90.6784 | approx_kl: 0.0096
+
+[Callback] Recording evaluation episode at step 1700010...
+[Callback] Replay saved: ./replays/replay_step_1700010.json (117 frames)
+
+Update: 56/65 | Steps: 1720320 | SPS: 1351 | Ret: -11.38 | Len: 116.8 | Goal: 6.0% | v_loss: 86.9717 | approx_kl: 0.0093
+
+[Callback] Recording evaluation episode at step 1750020...
+[Callback] Replay saved: ./replays/replay_step_1750020.json (1 frames)
+
+Update: 57/65 | Steps: 1751040 | SPS: 1354 | Ret: -1.80 | Len: 147.0 | Goal: 10.0% | v_loss: 70.8798 | approx_kl: 0.0099
+Update: 58/65 | Steps: 1781760 | SPS: 1357 | Ret: 3.22 | Len: 103.6 | Goal: 14.0% | v_loss: 102.7913 | approx_kl: 0.0076
+
+[Callback] Recording evaluation episode at step 1800000...
+[Callback] Replay saved: ./replays/replay_step_1800000.json (224 frames)
+
+Update: 59/65 | Steps: 1812480 | SPS: 1349 | Ret: 0.41 | Len: 125.3 | Goal: 11.0% | v_loss: 99.3540 | approx_kl: 0.0083
+Update: 60/65 | Steps: 1843200 | SPS: 1353 | Ret: 10.96 | Len: 111.3 | Goal: 17.0% | v_loss: 113.9876 | approx_kl: 0.0117
+
+[Callback] Recording evaluation episode at step 1850010...
+[Callback] Replay saved: ./replays/replay_step_1850010.json (371 frames)
+
+Update: 61/65 | Steps: 1873920 | SPS: 1341 | Ret: -12.56 | Len: 94.5 | Goal: 12.0% | v_loss: 112.5178 | approx_kl: 0.0171
+
+[Callback] Recording evaluation episode at step 1900020...
+[Callback] Replay saved: ./replays/replay_step_1900020.json (88 frames)
+
+Update: 62/65 | Steps: 1904640 | SPS: 1340 | Ret: -3.68 | Len: 140.8 | Goal: 9.0% | v_loss: 90.8571 | approx_kl: 0.0099
+Update: 63/65 | Steps: 1935360 | SPS: 1344 | Ret: 2.20 | Len: 161.5 | Goal: 11.0% | v_loss: 89.3362 | approx_kl: 0.0072
+
+[Callback] Recording evaluation episode at step 1950000...
+[Callback] Replay saved: ./replays/replay_step_1950000.json (565 frames)
+
+Update: 64/65 | Steps: 1966080 | SPS: 1322 | Ret: 4.77 | Len: 105.3 | Goal: 16.0% | v_loss: 100.0100 | approx_kl: 0.0169
+Update: 65/65 | Steps: 1996800 | SPS: 1326 | Ret: 8.54 | Len: 198.4 | Goal: 11.0% | v_loss: 69.3425 | approx_kl: 0.0090
+Successfully exported parallel PyTorch model to ONNX.
